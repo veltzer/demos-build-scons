@@ -1,0 +1,6 @@
+env=Environment()
+env.Append(
+	CXXFLAGS=[ '-O2', '-g3'],
+	CPPPATH=[ '/foo', '/bar' ],
+)
+env.Program('hello.cc')

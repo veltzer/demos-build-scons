@@ -1,0 +1,6 @@
+env=Environment(PROGSUFFIX='.elf')
+#env.Decider('timestamp-newer')
+#env.SetOption('implicit_cache', 1)
+env.Append(LIBPATH=['lib'])
+o=env.SharedObject(source='hello.c')
+l=env.SharedLibrary('lib/fubar', [ o ])

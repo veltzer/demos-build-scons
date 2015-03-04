@@ -1,0 +1,16 @@
+from __future__ import print_function
+
+def post_action(target, source, env):
+	print('Finished [%s]' % (','.join([str(x) for x in target])))
+
+print_set=set()
+def print_cmd_line(s, target, source, env):
+	tgt=','.join([str(x) for x in target])
+	if tgt not in print_set:
+		print('Making [%s]' % (tgt))
+		print_set.add(tgt)
+
+env=Environment(PROGSUFFIX='.elf')
+env['PRINT_CMD_LINE_FUNC']=print_cmd_line
+lib=env.Program('hello.c')
+env.AddPostAction(lib, post_action)

@@ -1,0 +1,12 @@
+env = Environment()
+
+t1_env=env.Clone()
+t1_env.SharedLibrary('add',[ 'add.c' ])
+
+t2_env=env.Clone()
+t2_env.Append(LIBS=['add'], LIBPATH=['.'])
+t2_env.SharedLibrary('mul',[ 'mul.c' ])
+
+t3_env=env.Clone()
+t3_env.Append(LIBS=['mul', 'add'], LIBPATH=['.'])
+t3_env.Program('main.elf', ['main.c'])

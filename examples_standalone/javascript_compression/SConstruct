@@ -1,0 +1,11 @@
+def compress_javascript(target,source,env):
+	print "targe is ",target
+	print "source is ",source
+	print "env is ",env
+	return None
+VariantDir('build','src')
+bld=Builder(action=compress_javascript)
+# empty environment
+env=Environment(BUILDERS={})
+env.Append(BUILDERS={ 'compress': bld})
+env.compress('src/Movies.js')

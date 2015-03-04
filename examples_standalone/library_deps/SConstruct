@@ -1,0 +1,13 @@
+env = Environment()
+env.Replace(CCFLAGS="-O2")
+
+l1_env=env.Clone()
+l1=l1_env.SharedLibrary('hello',[ 'hello.c' ])
+
+l2_env=env.Clone()
+l2_env.Append(
+#	LIBS=[ 'hello' ],
+	LIBPATH=[ '.' ],
+)
+l2=l2_env.SharedLibrary('goodbye',[ 'goodbye.c' ])
+l2_env.Depends(l2, l1)
