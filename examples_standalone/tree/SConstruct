@@ -1,4 +1,4 @@
-env = Environment()
+env = Environment(PROGSUFFIX='.elf')
 
 t1_env=env.Clone()
 t1_env.SharedLibrary('add',[ 'add.c' ])

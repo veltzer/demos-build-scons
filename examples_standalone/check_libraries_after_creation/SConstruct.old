@@ -4,7 +4,7 @@ def MySharedLibrary(env, library, sources, **args):
 	print "after"
 	return ret
 
-env = Environment()
+env = Environment(PROGSUFFIX='.elf')
 env['BUILDERS']['OriginalSharedLibrary']=env['BUILDERS']['SharedLibrary']
 env['BUILDERS']['SharedLibrary']=MySharedLibrary
 env.SharedLibrary('hello',[ 'hello.c' ])

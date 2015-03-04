@@ -1,4 +1,4 @@
-env=Environment()
+env=Environment(PROGSUFFIX='.elf')
 bin1=env.Program('hello.c')
 bin2=env.Program('world.c')
 

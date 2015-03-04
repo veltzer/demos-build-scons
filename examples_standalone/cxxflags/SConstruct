@@ -1,4 +1,4 @@
-env=Environment()
+env=Environment(PROGSUFFIX='.elf')
 env.Append(
 	CXXFLAGS=[ '-O2', '-g3'],
 	CPPPATH=[ '/foo', '/bar' ],

@@ -6,6 +6,6 @@ def compress_javascript(target,source,env):
 VariantDir('build','src')
 bld=Builder(action=compress_javascript)
 # empty environment
-env=Environment(BUILDERS={})
+env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
 env.Append(BUILDERS={ 'compress': bld})
 env.compress('src/Movies.js')
