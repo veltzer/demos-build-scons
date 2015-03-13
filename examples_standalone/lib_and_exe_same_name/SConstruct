@@ -1,0 +1,5 @@
+env=Environment()
+env['PROGSUFFIX']='.elf'
+env.Replace(CCFLAGS="-O2")
+env.SharedLibrary('foo',[ 'sharedlibrary.c' ])
+env.Program('foo',[ 'program.c' ])
