@@ -1,0 +1,3 @@
+- do example about strictness of linking
+	get very strict flags for linking from the smartbuild project.
+- do example about rpath and rpath-link
