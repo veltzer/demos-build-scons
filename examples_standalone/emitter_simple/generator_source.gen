@@ -1,6 +1,6 @@
 foo:
-	a:int
+	a:bool
 	b:int
-bar:
+tar:
 	c:float
 	d:double

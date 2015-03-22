@@ -12,5 +12,5 @@ for line in sys.stdin:
 	if re.match('^\w+:\s*', line):
 		line=line.rstrip()
 		line=line[:-1]
-		print('gen/'+line+'.c')
-		print('gen/'+line+'.h')
+		print('gen/'+line+'.cc')
+		print('gen/'+line+'.hh')
