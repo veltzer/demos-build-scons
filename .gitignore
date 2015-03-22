@@ -17,6 +17,8 @@
 *.stamp
 *.out
 *.gen.c
+*.gen.h
+**/gen/*
 # locks by open office
 .~lock.*
 

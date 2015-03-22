@@ -1,7 +1,16 @@
 from __future__ import print_function
 import subprocess # for check_call
 
-def compress(target, source, env):
+def modify_targets(target, source, env):
+	assert len(source)==2
+	assert len(target)==0
+	source_name=str(source[0])
+	target_list_generator=str(source[1])
+	print('source_name is', source_name)
+	print('target_list_generator is', target_list_generator)
+	return target, source
+
+def generate(target, source, env):
 	assert len(target)==1
 	assert len(source)==1
 	target_name=str(target[0])
@@ -12,15 +21,17 @@ def compress(target, source, env):
 		],
 		stdout=open(target_name, 'w'),
 	)
-	#print('targe is', target_name)
+	#print('target is', target_name)
 	#print('source is', source_name)
 	#print('env is',env)
 	return None
-compress_builder=Builder(
-	action=compress,
-	suffix='.out',
+generate_builder=Builder(
+	action=generate,
+	emitter=modify_targets,
 )
 # new environment
 env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
-env.Append(BUILDERS={ 'Compress': compress_builder })
-env.Compress('src/Movies.js')
+env.Append(BUILDERS={ 'Generate': generate_builder })
+env.Generate(
+	[ 'generator_source.gen', 'list_generated_files.py' ]
+)
