@@ -21,7 +21,7 @@ def modify_targets(target, source, env):
 	for trg in target:
 		print(trg)
 	'''
-	assert len(source)==3
+	#assert len(source)==3
 	assert len(target)==0
 	source_name=str(source[0])
 	target_list_generator=str(source[1])
@@ -40,7 +40,7 @@ def modify_targets(target, source, env):
 
 def generate(target, source, env):
 	#print(len(target))
-	assert len(source)==3
+	#assert len(source)==3
 	source_name=str(source[0])
 	target_generator=str(source[2])
 	#print('source_name is', source_name)
@@ -57,12 +57,13 @@ generate_builder=Builder(
 )
 # new environment
 env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
+tgt_gen=env.Program('generate', [ 'generate.cc' ])
 env.Append(BUILDERS={ 'Generate': generate_builder })
 tgt=env.Generate(
 	[],
-	[ 'generator_source.gen', 'list_generated_files.py', 'generate.elf', ],
+	[ 'generator_source.gen', 'list_generated_files.py', tgt_gen[0], 'generate.py' ],
 )
+env.Depends(tgt, tgt_gen)
 
 env.Append(CXXFLAGS=[ '-I.'])
 env.SharedLibrary('mylib', get_relevant_list(tgt))
-env.Program('generate.elf', [ 'generate.cc' ])
