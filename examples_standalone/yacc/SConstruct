@@ -1,13 +1,13 @@
 from __future__ import print_function
 import subprocess # for check_call
 
-def compress(target, source, env):
+def yacc(target, source, env):
 	assert len(target)==1
 	assert len(source)==1
 	target_name=str(target[0])
 	source_name=str(source[0])
 	subprocess.check_call([
-		'yui-compressor',
+		'yacc',
 		source_name
 		],
 		stdout=open(target_name, 'w'),
@@ -16,11 +16,13 @@ def compress(target, source, env):
 	#print('source is', source_name)
 	#print('env is',env)
 	return None
-compress_builder=Builder(
-	action=compress,
-	suffix='.out',
+yacc_builder=Builder(
+	action=yacc,
+	suffix='.c',
 )
 # new environment
 env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
-env.Append(BUILDERS={ 'Compress': compress_builder })
-env.Compress('src/Movies.js')
+env.Replace(CCFLAGS="-O2")
+env.Append(BUILDERS={ 'Yacc': yacc_builder })
+env.Yacc('foo.y')
+env.Program('prog',[ 'main.c', 'foo.c', 'add.c' ])
