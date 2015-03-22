@@ -1,0 +1,6 @@
+foo:
+	a:bool
+	b:int
+bar:
+	c:float
+	d:double

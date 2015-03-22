@@ -1,0 +1,68 @@
+from __future__ import print_function
+import subprocess # for check_call
+import os.path # for join
+import os # for getcwd
+import pprint # for pprint
+import inspect # for getmembers
+
+def get_relevant_list(tgt):
+	l=[]
+	for x in tgt:
+		if x.path.endswith('.cc'):
+			l.append(x)
+	return l
+
+def modify_targets(target, source, env):
+	'''
+	print('sources...')
+	for src in source:
+		print(src)
+	print('targets...')
+	for trg in target:
+		print(trg)
+	'''
+	assert len(source)==3
+	assert len(target)==0
+	source_name=str(source[0])
+	target_list_generator=str(source[1])
+	#print('source_name is [{0}]'.format(source_name))
+	#print('target_list_generator is [{0}]'.format(target_list_generator))
+	out=subprocess.check_output([
+		os.path.join(os.getcwd(), target_list_generator),
+	], stdin=open(source_name, 'r'))
+	out=out.rstrip()
+	assert len(out.split('\n'))>0
+	#print(out, end='')
+	for x in out.split('\n'):
+		#print('adding [{0}]'.format(x))
+		target.append(x)
+	return target, source
+
+def generate(target, source, env):
+	#print(len(target))
+	assert len(source)==3
+	source_name=str(source[0])
+	target_generator=str(source[2])
+	#print('source_name is', source_name)
+	#print('target_generator is', target_generator)
+	subprocess.check_call([
+		os.path.join(os.getcwd(), target_generator),
+		],
+		stdin=open(source_name, 'r'),
+	)
+	return None
+generate_builder=Builder(
+	action=generate,
+	emitter=modify_targets,
+)
+# new environment
+env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
+env.Append(BUILDERS={ 'Generate': generate_builder })
+tgt=env.Generate(
+	[],
+	[ 'generator_source.gen', 'list_generated_files.py', 'generate.elf', ],
+)
+
+env.Append(CXXFLAGS=[ '-I.'])
+env.SharedLibrary('mylib', get_relevant_list(tgt))
+env.Program('generate.elf', [ 'generate.cc' ])
