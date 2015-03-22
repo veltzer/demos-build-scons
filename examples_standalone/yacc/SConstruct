@@ -8,9 +8,10 @@ def yacc(target, source, env):
 	source_name=str(source[0])
 	subprocess.check_call([
 		'yacc',
-		source_name
+		source_name,
+		'-o',
+		target_name
 		],
-		stdout=open(target_name, 'w'),
 	)
 	#print('targe is', target_name)
 	#print('source is', source_name)
@@ -18,11 +19,12 @@ def yacc(target, source, env):
 	return None
 yacc_builder=Builder(
 	action=yacc,
-	suffix='.c',
+	suffix='.gen.c',
+	src_suffix='.y',
 )
 # new environment
 env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
 env.Replace(CCFLAGS="-O2")
 env.Append(BUILDERS={ 'Yacc': yacc_builder })
-env.Yacc('foo.y')
-env.Program('prog',[ 'main.c', 'foo.c', 'add.c' ])
+env.Yacc('foo')
+env.Program('prog',[ 'main.c', 'foo.gen.c', 'add.c' ])

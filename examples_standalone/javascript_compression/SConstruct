@@ -8,7 +8,7 @@ def compress(target, source, env):
 	source_name=str(source[0])
 	subprocess.check_call([
 		'yui-compressor',
-		source_name
+		source_name,
 		],
 		stdout=open(target_name, 'w'),
 	)
