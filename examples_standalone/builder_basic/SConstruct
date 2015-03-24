@@ -23,4 +23,4 @@ compress_builder=Builder(
 # new environment
 env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
 env.Append(BUILDERS={ 'Compress': compress_builder })
-env.Compress('src/Movies.js')
+env.Compress('Movies.js')
