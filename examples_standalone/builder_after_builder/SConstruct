@@ -1,0 +1,44 @@
+from __future__ import print_function
+import subprocess # for check_call
+import shutil # for copy
+
+def compress_function(target, source, env):
+	#print('target is', target_name)
+	#print('source is', source_name)
+	#print('env is',env)
+	assert len(target)==1
+	assert len(source)==1
+	target_name=str(target[0])
+	source_name=str(source[0])
+	subprocess.check_call([
+		'/usr/bin/yui-compressor',
+		source_name,
+		],
+		stdout=open(target_name, 'w'),
+	)
+	return None
+compress_builder=Builder(
+	action=compress_function,
+	suffix='.out',
+)
+def sign_function(target, source, env):
+	assert len(target)==1
+	assert len(source)==1
+	target_name=str(target[0])
+	source_name=str(source[0])
+	shutil.copy(source_name, target_name)
+	with open(target_name, 'a') as f:
+		f.write('\nI signed it!\n')
+	return None
+sign_builder=Builder(
+	action=sign_function,
+	suffix='.sign.out',
+)
+
+env=Environment(PROGSUFFIX='.elf')
+env.Append(BUILDERS={
+	'Compress': compress_builder,
+	'Sign': sign_builder,
+})
+compressed=env.Compress('Movies.js')
+env.Sign(compressed)

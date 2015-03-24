@@ -1,26 +1,29 @@
 from __future__ import print_function
 import subprocess # for check_call
+import time # for sleep
 
-def compress(target, source, env):
+def compress_function(target, source, env):
+	#print('target is', target_name)
+	#print('source is', source_name)
+	#print('env is',env)
 	assert len(target)==1
 	assert len(source)==1
 	target_name=str(target[0])
 	source_name=str(source[0])
 	subprocess.check_call([
-		'yui-compressor',
+		'/usr/bin/yui-compressor',
 		source_name,
 		],
 		stdout=open(target_name, 'w'),
 	)
-	#print('targe is', target_name)
-	#print('source is', source_name)
-	#print('env is',env)
+	time.sleep(10)
 	return None
 compress_builder=Builder(
-	action=compress,
+	action=compress_function,
 	suffix='.out',
 )
-# new environment
-env=Environment(BUILDERS={}, PROGSUFFIX='.elf')
+
+env=Environment(PROGSUFFIX='.elf')
 env.Append(BUILDERS={ 'Compress': compress_builder })
 env.Compress('Movies.js')
+env.Compress('Books.js')
