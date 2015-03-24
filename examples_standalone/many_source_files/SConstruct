@@ -1,0 +1,4 @@
+env=Environment(PROGSUFFIX='.elf')
+
+import glob # for glob
+env.Program(glob.glob('*.c'))

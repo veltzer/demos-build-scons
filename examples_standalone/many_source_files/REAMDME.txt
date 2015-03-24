@@ -1,0 +1,2 @@
+This example shows that since scons is based on python you can use python
+library functions in order not to hardcode file names in your Sconstruct files.
