@@ -1,0 +1,14 @@
+env=Environment(PROGSUFFIX='.elf')
+
+# instead of this:
+env.Program([
+	'file1.c',
+	'file2.c',
+	#'file3.c',
+	'file4.c',
+	'file5.c',
+	'main.c',
+])
+# we write this:
+#import glob # for glob
+#env.Program(glob.glob('*.c'))

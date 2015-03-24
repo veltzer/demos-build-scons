@@ -1,3 +1,5 @@
+#include "hello.h"
+
 int goodbye(int a,int b) {
-	return a+b;
+	return hello(a,b);
 }

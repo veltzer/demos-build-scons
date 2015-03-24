@@ -1,13 +1,18 @@
 from __future__ import print_function
 
+# WARNING: target and source are lists! so you have multiple sources and
+# multiple targets
 def post_action(target, source, env):
 	print('Finished [%s]' % (','.join([str(x) for x in target])))
+	print('From sources [%s]' % (','.join([str(x) for x in source])))
 
 env=Environment(PROGSUFFIX='.elf')
+
+bin2=env.Program('two.c')
+env.AddPostAction(bin2, post_action)
+
 obj=env.Object('one.c')
 env.AddPostAction(obj, post_action)
 bin=env.Program(obj)
 env.AddPostAction(bin, post_action)
 
-bin2=env.Program('two.c')
-env.AddPostAction(bin2, post_action)
