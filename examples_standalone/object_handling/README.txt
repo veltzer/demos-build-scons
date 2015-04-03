@@ -1,2 +1,3 @@
-The idea of this example is to check whether we can give each source a random
-object name.
+We show how to work with scons at the Object level.
+We show how to create binaries, libraries etc.
+And how to create multiple variants at the same run.

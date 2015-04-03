@@ -1,1 +1,1 @@
-This is the most minimal scons program.
+This is the most minimal scons example.

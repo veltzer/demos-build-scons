@@ -1,4 +1,4 @@
-env = Environment(PROGSUFFIX='.elf')
+env=Environment(PROGSUFFIX='.elf')
 env.Replace(CCFLAGS="-O2")
 
 l1_env=env.Clone()

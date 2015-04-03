@@ -23,7 +23,7 @@ for line in sys.stdin:
 		last=line
 	if re.match('^\s+\w+:\w+\s*$', line):
 		line=line.strip()
-		k,v = line.split(':')
+		k,v=line.split(':')
 		d[last][k]=v
 for k in sorted(d.keys()):
 	v=d[k]

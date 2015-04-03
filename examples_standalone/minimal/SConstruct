@@ -1,1 +1,1 @@
-Program('hello.c')
+Program('main.c')
