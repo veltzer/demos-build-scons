@@ -1,4 +1,2 @@
 env=Environment(PROGSUFFIX='.elf')
-env['CCCOMSTR']='Compiling [$TARGET]'
 env.Program('hello.c')
-# Program('hello.c')

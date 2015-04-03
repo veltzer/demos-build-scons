@@ -1,2 +1,2 @@
 env=Environment(PROGSUFFIX='.elf')
-env.Program('hello.c')
+env.Program('main.c')
