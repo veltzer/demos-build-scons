@@ -1,10 +1,14 @@
 from __future__ import print_function
+import sys # for exit
 
 env=Environment(PROGSUFFIX='.elf')
-env.Program('hello.c')
+env.Program('main.c')
 
-t=env.Entry('hello.c')
+t=env.Entry('main.c')
 
 print(t)
 print(type(t))
 print(str(t))
+print(dir(t))
+
+sys.exit(0)
