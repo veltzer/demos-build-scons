@@ -5,5 +5,5 @@ The problems with this solution:
 - it is not applied to anything which implicit (like one of the Objects).
 - you must use the new names of builders for it to work.
 
-Refrences:
+References:
 http://matt.eifelle.com/2007/11/12/using-scons-to-create-python-modules-with-visual-studio-2005/ 
