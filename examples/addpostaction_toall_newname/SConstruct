@@ -1,0 +1,27 @@
+from __future__ import print_function
+
+def post_action(target, source, env):
+	tgt=','.join([str(x) for x in target])
+	src=','.join([str(x) for x in source])
+	print('Finished [{0}] from [{1}]'.format(tgt, src))
+
+env=Environment(PROGSUFFIX='.elf')
+
+def add_new_builder(env, name):
+	def new_builder(env, *kargs, **args):
+		method=getattr(env, name)
+		res=method(*kargs, **args)
+		env.AddPostAction(res, post_action)
+		return res
+	# you can do the following line but that is not the best way to
+	# add a builder...
+	env['BUILDERS']['New'+name]=new_builder
+	#bld=Builder(action=new_builder)
+	#env.Append(BUILDERS={'New'+name: bld})
+
+for name in env['BUILDERS'].keys():
+	add_new_builder(env, name)
+
+obj=env.NewObject('one.o', 'one.c')
+bin=env.NewProgram(obj)
+bin2=env.NewProgram('two.c')

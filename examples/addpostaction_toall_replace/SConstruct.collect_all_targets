@@ -1,0 +1,28 @@
+from __future__ import print_function
+import SCons.Builder # for CompositeBuilder
+
+def post_action(target, source, env):
+	tgt=','.join([str(x) for x in target])
+	src=','.join([str(x) for x in source])
+	print('Finished [{0}] from [{1}]'.format(tgt, src))
+	return None
+
+env=Environment(PROGSUFFIX='.elf')
+
+obj=env.Object(target='one.o', source='one.c')
+bin=env.Program(target='one', source=obj)
+bin2=env.Program(target='two', source='two.c')
+
+def yield_all_targets(env, node):
+	if node.has_builder():
+		yield node
+	for kid in node.all_children():
+		for n in yield_all_targets(env, kid):
+			yield n
+
+dot_node=env.arg2nodes('.', env.fs.Entry)[0]
+visited=set([dot_node])
+for node in yield_all_targets(env, dot_node):
+	if node not in visited:
+		visited.add(node)
+		env.AddPostAction(node, post_action)
