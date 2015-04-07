@@ -1,0 +1,13 @@
+from __future__ import print_function
+import glob # for glob
+import os.path # for dirname, join, isfile
+
+env=Environment()
+env['PROGSUFFIX']='.elf'
+
+for x in glob.glob("*/SConstruct"):
+	if not os.path.isfile(os.path.join(os.path.dirname(x), 'SKIP.txt')):
+		print('doing [{0}]'.format(x))
+		SConscript(x, exports=['env'])
+	else:
+		print('skipping [{0}]'.format(x))

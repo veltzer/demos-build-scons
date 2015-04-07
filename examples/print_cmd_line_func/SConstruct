@@ -1,0 +1,10 @@
+from __future__ import print_function
+
+def print_cmd_line(s, target, source, env):
+	tgt=','.join([str(x) for x in target])
+	src=','.join([str(x) for x in source])
+	print('Making [{0}] from [{1}]'.format(tgt, src))
+
+env=Environment(PROGSUFFIX='.elf')
+env['PRINT_CMD_LINE_FUNC']=print_cmd_line
+env.Program('main.c')

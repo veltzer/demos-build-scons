@@ -1,0 +1,6 @@
+env=Environment(PROGSUFFIX='.elf')
+o1=env.Object(source='main1.c',target='main1.o')
+o2=env.Object(source='main2.c',target='main2.o')
+oadd=env.Object(source='add.c',target='add.o')
+env.Program(target='main1',source=[ o1, oadd ])
+env.Program(target='main2',source=[ o2, oadd ])

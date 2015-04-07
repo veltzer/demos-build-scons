@@ -1,0 +1,20 @@
+import os.path # for exists
+import os # for utime
+
+def touch(fname):
+	if os.path.isfile(fname):
+		os.utime(fname, None)
+	else:
+		open(fname, 'w').close()
+
+def build_function(target, source, env):
+	print "making", target[0], "from", source
+	touch(str(target[0]))
+	return None
+
+env=Environment(PROGSUFFIX='.elf')
+bld=Builder(action=build_function)
+env.Append(BUILDERS={'CheckedLibrary' : bld})
+
+lib=env.SharedLibrary('hello',[ 'hello.c' ])
+check=env.CheckedLibrary('hello.stamp',[ lib ])

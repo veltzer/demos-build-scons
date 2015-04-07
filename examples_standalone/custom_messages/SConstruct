@@ -1,3 +1,0 @@
-env=Environment(PROGSUFFIX='.elf', LINKCOMSTR='Linking [$TARGET]')
-env['CCCOMSTR']='Compiling [$TARGET]'
-env.Program('hello.c')

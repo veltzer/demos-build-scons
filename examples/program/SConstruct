@@ -1,0 +1,3 @@
+env=Environment(PROGSUFFIX='.elf')
+env.Replace(CCFLAGS="-O2")
+env.Program('prog',[ 'main.c', 'add.c' ])

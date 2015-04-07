@@ -1,7 +1,0 @@
-import glob # for glob
-
-env=Environment()
-env['PROGSUFFIX']='.elf'
-
-for x in glob.glob("*/SConstruct"):
-	SConscript(x, exports=['env'])
