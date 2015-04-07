@@ -4,3 +4,6 @@ foo:
 bar:
 	c:float
 	d:double
+newclass:
+	e:float
+	f:double

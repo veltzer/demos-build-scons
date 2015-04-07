@@ -1,5 +1,5 @@
 foo:
-	a:bool
+	z:bool
 	b:int
 bar:
 	c:float

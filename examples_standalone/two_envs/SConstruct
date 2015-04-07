@@ -1,0 +1,8 @@
+env=Environment(PROGSUFFIX='.elf')
+
+e1=env.Clone()
+e1.Replace(CFLAGS=['-O3', '-g2'])
+prog1=e1.Program('hello1.c')
+e2=env.Clone()
+e2.Replace(CFLAGS=['-O0', '-g3'])
+prog2=e2.Program('hello2.c')

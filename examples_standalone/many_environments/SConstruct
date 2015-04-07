@@ -1,0 +1,7 @@
+import SCons
+
+SCons.Defaults.DefaultEnvironment(tools=[])
+
+env=Environment()
+for i in range(10000):
+	e=env.Clone()
