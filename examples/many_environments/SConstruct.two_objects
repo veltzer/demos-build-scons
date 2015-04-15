@@ -1,0 +1,18 @@
+import sys # for exit
+
+env=Environment()
+o1=env.Object(
+		source='myfile1.c',
+		target='myfile1.o',
+		CFLAGS='-DDEF1',
+)
+o2=env.Object(
+		source='myfile2.c',
+		target='myfile2.o',
+		CFLAGS='-DDEF2',
+)
+print(o1[0].get_build_env())
+print(o2[0].get_build_env())
+print(env)
+
+sys.exit(0)

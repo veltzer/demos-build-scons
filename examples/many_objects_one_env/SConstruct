@@ -1,0 +1,45 @@
+import time # for time
+import sys # for exit
+import os # for stat
+
+num=10000
+
+name='create {0} objects from the same environment each with same flags'.format(num)
+t1=time.time()
+env=Environment()
+for i in range(num):
+	env.Object(
+		source='myfile{0}.c'.format(i),
+		target='myfile{0}.o'.format(i),
+	)
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+name='create {0} hashes with 100 elements each'.format(num)
+t1=time.time()
+d=dict()
+for i in range(num):
+	d[i]=dict()
+	for j in range(100):
+		d[i][j]=j
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+name='stat of {0} non existing files'.format(num)
+t1=time.time()
+os.stat
+d=dict()
+for i in range(num):
+	fname='myfile{0}.c'.format(i)
+	try:
+		s=os.stat(fname)
+	except:
+		pass
+	'''
+	if os.path.exists(fname):
+		s=os.stat(fname)
+	'''
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+sys.exit(0)

@@ -1,7 +1,91 @@
-import SCons
+import SCons # for Defaults
+import sys # for exit
+import time # for time
+import copy # for deepcopy
 
+num=50
+
+def clone_env(env, i):
+	cccom=copy.copy(env['CCCOM'])
+	cccom=cccom.replace('CCFLAGS', 'CCFLAGS -DDEF'+str(i))
+	shcccom=copy.copy(env['SHCCCOM'])
+	shcccom=shcccom.replace('CCFLAGS', 'CCFLAGS -DDEF'+str(i))
+	cxxcom=copy.copy(env['CXXCOM'])
+	cxxcom=cxxcom.replace('CCFLAGS', 'CCFLAGS -DDEF'+str(i))
+	shcxxcom=copy.copy(env['SHCXXCOM'])
+	shcxxcom=shcxxcom.replace('CCFLAGS', 'CCFLAGS -DDEF'+str(i))
+	fasterEnv=env.Clone(
+		CCCOM=cccom,
+		CXXCOM=cxxcom,
+		SHCCCOM=shcccom,
+		SHCXXCOM=shcxxcom,
+	)
+	return fasterEnv
+
+'''
+name='create {0} environments from scratch'.format(num)
 SCons.Defaults.DefaultEnvironment(tools=[])
+t1=time.time()
+for i in range(num):
+	env=Environment()
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+'''
 
+name='create 1 environment and {0} clones'.format(num)
+t1=time.time()
 env=Environment()
-for i in range(10000):
+for i in range(num):
 	e=env.Clone()
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+name='create 1 environment and {0} overrides'.format(num)
+t1=time.time()
+env=Environment()
+for i in range(num):
+	e=SCons.Environment.OverrideEnvironment(env, overrides={'CFLAGS':'-DDEF'+str(i)})
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+name='create 1 environment and {0} clones using the idea in the GoFastButton'.format(num)
+t1=time.time()
+env=Environment()
+for i in range(num):
+	e=clone_env(env, i)
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+name='create 1 env and copy using pythons copy.copy {0} envs (this does really work)'.format(num)
+t1=time.time()
+env=Environment()
+for i in range(num):
+	e=copy.copy(env)
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+name='create {0} objects from the same environment each with different flags'.format(num)
+t1=time.time()
+env=Environment()
+for i in range(num):
+	env.Object(
+		source='myfile{0}.c'.format(i),
+		target='myfile{0}.o'.format(i),
+		CFLAGS='-DDEF{0}'.format(i),
+	)
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+name='create {0} objects from the same environment all with same flags'.format(num)
+t1=time.time()
+env=Environment()
+for i in range(num):
+	env.Object(
+		source='myotherfile{0}.c'.format(i),
+		target='myotherfile{0}.o'.format(i),
+		CFLAGS='-DDEBUG',
+	)
+t2=time.time()
+print('time of [{0}] is {1}'.format(name, t2-t1))
+
+sys.exit(0)

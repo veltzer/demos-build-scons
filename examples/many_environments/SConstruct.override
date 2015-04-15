@@ -1,0 +1,19 @@
+import sys # for exit
+import SCons # for Environment
+
+env=Environment()
+e1=SCons.Environment.OverrideEnvironment(env, overrides={'CFLAGS':'-DDEF1'})
+e2=SCons.Environment.OverrideEnvironment(env, overrides={'CFLAGS':'-DDEF2'})
+print(e1['CFLAGS'])
+print(e2['CFLAGS'])
+o1=e1.Object(
+	source='file.c',
+	target='file.o',
+)
+o2=e2.Object(
+	source='file.c',
+	target='file.o',
+)
+print(o1)
+print(o2)
+#sys.exit(0)
