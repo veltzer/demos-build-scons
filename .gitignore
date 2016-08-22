@@ -38,3 +38,5 @@ out/*
 *.o
 *.elf
 *.cache
+
+/tools.stamp

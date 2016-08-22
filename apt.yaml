@@ -1,0 +1,6 @@
+---
+packages:
+        - name: scons
+          reason: for scons(1)
+        - name: scons-doc
+          reason: for scons docs
