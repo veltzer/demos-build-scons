@@ -5,7 +5,7 @@ all: tools.stamp
 tools.stamp: templardefs/deps.py
 	$(info doing [$@])
 	@templar install_deps
-	@make_helper touch-mkdir $@
+	@pymakehelper touch_mkdir $@
 
 .PHONY: clean
 clean:
