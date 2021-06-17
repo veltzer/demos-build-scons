@@ -1,11 +1,6 @@
 .PHONY: all
-all: tools.stamp
+all:
 	@true
-
-tools.stamp: templardefs/deps.py
-	$(info doing [$@])
-	@templar install_deps
-	@pymakehelper touch_mkdir $@
 
 .PHONY: clean
 clean:
