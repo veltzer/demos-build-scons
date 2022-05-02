@@ -39,8 +39,6 @@ out/*
 *.elf
 *.cache
 
-/tools.stamp
-
 # python related
 __pycache__
 *.pyo
