@@ -1,0 +1,4 @@
+packages=[
+    'scons',
+    'scons-doc',
+]
