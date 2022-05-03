@@ -43,3 +43,4 @@ out/*
 __pycache__
 *.pyo
 *.pyc
+/.pydmt
