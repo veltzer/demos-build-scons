@@ -2,6 +2,6 @@
 all:
 	@true
 
-.PHONY: clean
-clean:
+.PHONY: clean_hard
+clean_hard:
 	@git clean -qffxd
