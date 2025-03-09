@@ -119,7 +119,7 @@ node_modules/
 *.log
 
 # scons
-/.sconsign.dblite
+.sconsign.dblite
 
 # DS_Store
 .DS_Store
