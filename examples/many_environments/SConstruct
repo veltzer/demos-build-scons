@@ -3,7 +3,7 @@ import sys # for exit
 import time # for time
 import copy # for deepcopy
 
-num=50
+num=10
 
 def clone_env(env, i):
 	cccom=copy.copy(env['CCCOM'])
@@ -88,4 +88,4 @@ for i in range(num):
 t2=time.time()
 print('time of [{0}] is {1}'.format(name, t2-t1))
 
-sys.exit(0)
+# sys.exit(0)
