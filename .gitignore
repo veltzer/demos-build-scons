@@ -143,11 +143,15 @@ build/
 *.qcow2
 *.iso
 
-# dev envs
+# jetbrains and eclipse
 .cache
 .settings
 .classpath
 .project
 .project.xml
-.idea
+.idea/
 build.properties
+
+# scala
+target/
+project/
