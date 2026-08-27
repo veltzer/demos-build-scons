@@ -1,0 +1,23 @@
+version = 1
+revision = 3
+requires-python = ">=3.12"
+
+[[package]]
+name = "demos-build-scons"
+version = "0.0.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "scons" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "scons" }]
+
+[[package]]
+name = "scons"
+version = "4.11.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/dd/82/3c4e089ac8df2eaee8a7f14e489b2a76f94f4c1d8defa4e46c8ad15cae86/scons-4.11.0.tar.gz", hash = "sha256:5ba48f9e2eb6b9178cabdc9893792418e6970c84f43f4b027e4468e20616a89c", size = 3269126, upload-time = "2026-08-11T04:29:45.62Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fc/ac/a4445bbbd58a5fa6a5c8b3b0458ffbee04e4acaff87677058eab9c6af682/scons-4.11.0-py3-none-any.whl", hash = "sha256:2edc077aaeafc43377ba46ce1fa3e7b40edea59c62db9ef7e39e07dc88b754fa", size = 4123742, upload-time = "2026-08-11T04:29:42.881Z" },
+]
