@@ -56,7 +56,7 @@ Ext.onReady(function(){
 		// this feature doesnt work right
 		//startCollapsed: true,
 	});
-	var w_grid=Ext.create('Ext.grid.Panel',{
+	Ext.create('Ext.grid.Panel',{
 		title: 'Movies that I have seen',
 		store: w_store,
 		frame: false,
