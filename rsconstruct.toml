@@ -33,6 +33,6 @@ args = [
 
 # ─── javascript ──────────────────────────────────────────────────────────────
 
-[processor.eslint]
+[processor.oxlint]
 src_dirs = ["examples"]
-args = ["-c", ".eslint.config.js"]
+args = ["-c", ".oxlintrc.json"]
