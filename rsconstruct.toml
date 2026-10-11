@@ -18,7 +18,7 @@ src_files = ["README.md"]
 
 # ─── shell ───────────────────────────────────────────────────────────────────
 
-[processor.checker.shellcheck]
+[processor.checker.ishellcheck]
 src_dirs = ["examples/many_environments"]
 
 # ─── c / c++ ─────────────────────────────────────────────────────────────────
