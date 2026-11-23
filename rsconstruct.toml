@@ -32,13 +32,17 @@ src_dirs = ["examples/many_environments"]
 
 # ─── c / c++ ─────────────────────────────────────────────────────────────────
 
+# Each example directory (one SConstruct) is its own program: one run per directory.
 [processor.checker.cppcheck]
+dep_inputs = ["cppcheck.cfg"]
+batch_by_dir = true
 src_dirs = ["examples", "examples_standalone/embed_scons"]
 args = [
 	"--error-exitcode=1",
-	"--enable=warning,style,performance,portability",
+	"--enable=warning,style,performance,portability,information,unusedFunction",
 	"--check-level=exhaustive",
 	"--inline-suppr",
+	"--library=cppcheck.cfg",
 ]
 
 # ─── javascript ──────────────────────────────────────────────────────────────
