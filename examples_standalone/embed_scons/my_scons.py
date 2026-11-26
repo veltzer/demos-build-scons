@@ -1,6 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
-import sys # for path
+import sys  # for path
 
 # print something to see that we are ok...
 print('here we are before scons...')
@@ -9,5 +9,6 @@ print('here we are before scons...')
 sys.path.insert(0, '/usr/lib/scons')
 
 # now run scons
-import SCons.Script
+import SCons.Script  # noqa: E402  teaching: the import must come after the sys.path change above
+
 SCons.Script.main()

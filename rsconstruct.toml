@@ -4,8 +4,16 @@
 # src_dirs entries name directories; "." (the whole tree) is a config error
 reject_dot_src_dirs = true
 
+# lint the Python files with ruff (policy: .ruff.toml)
+[processor.checker.ruff]
+src_dirs = ["examples", "examples_standalone"]
+
+# type-check the Python files with pyrefly (policy: [tool.pyrefly] in pyproject.toml)
+[processor.checker.pyrefly]
+src_dirs = ["examples", "examples_standalone"]
+
 [processor.checker.taplo]
-src_files = [".rumdl.toml", "pyproject.toml", "rsconstruct.toml"]
+src_files = [".ruff.toml", ".rumdl.toml", "pyproject.toml", "rsconstruct.toml"]
 
 # lint the Lua configuration with luacheck (policy: .luacheckrc)
 [processor.checker.iluacheck]

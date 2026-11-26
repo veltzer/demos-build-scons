@@ -11,6 +11,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "pyrefly",
     "pytest",
     "ruff",
 ]
@@ -19,3 +20,16 @@ dev = [
 # Demo/teaching/archive repo: not an installable package.
 package = false
 
+[tool.pyrefly]
+# Type checking (rsconstruct's pyrefly processor), with pyrefly's default
+# error set. "." on the search path is mypy's implicit current directory.
+# Warnings fail the check like errors (pyrefly lets them pass by default).
+min-severity = "warn"
+search-path = [
+    "examples",
+    "examples_standalone",
+    ".",
+]
+
+[tool.pyrefly.errors]
+no-any-return = "error"
